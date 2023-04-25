@@ -79,6 +79,7 @@ protected:
 
 // Specialization for allocators that have the property that we don't 特化具有我们没有的属性的分配器
 // actually have to store an allocator object.  实际上必须存储一个分配器对象。
+/*这里是分配器的特型，当_Tp为基础类型时，可以直接使用内存池来调用*/
 template <class _Tp, class _Allocator>
 class _Vector_alloc_base<_Tp, _Allocator, true> {
 public:
@@ -96,6 +97,7 @@ protected:
   _Tp* _M_end_of_storage;
 
   typedef typename _Alloc_traits<_Tp, _Allocator>::_Alloc_type _Alloc_type;
+//_Alloc_traits是一种模板类           _Alloc_type是一种别名
   _Tp* _M_allocate(size_t __n)
     { return _Alloc_type::allocate(__n); }
   void _M_deallocate(_Tp* __p, size_t __n)
